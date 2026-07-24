@@ -2,9 +2,7 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-# ----------------------------------------------------------------------
 # Page setup
-# ----------------------------------------------------------------------
 st.set_page_config(page_title="Amazon Sales Dashboard", layout="wide")
 
 st.title("Amazon Sales Data Dashboard")
@@ -15,9 +13,7 @@ st.write(
     "discounting behave, and whether higher ratings track with price."
 )
 
-# ----------------------------------------------------------------------
 # Load data
-# ----------------------------------------------------------------------
 @st.cache_data
 def load_data():
     df = pd.read_csv("data/raw/amazon.csv")
@@ -25,9 +21,8 @@ def load_data():
 
 raw_df = load_data()
 
-# ----------------------------------------------------------------------
+
 # Cleaning
-# ----------------------------------------------------------------------
 # discounted_price / actual_price: text like "₹1,099" -> float
 # discount_percentage: text like "64%" -> float
 # rating: mostly numeric strings, but at least one row has a stray "|"
@@ -73,9 +68,8 @@ def clean_data(df):
 
 df, rows_dropped = clean_data(raw_df)
 
-# ----------------------------------------------------------------------
 # Preview
-# ----------------------------------------------------------------------
+
 with st.expander("Preview raw dataset"):
     st.dataframe(raw_df.head(20))
     st.caption(
@@ -84,9 +78,7 @@ with st.expander("Preview raw dataset"):
         f"were dropped, leaving {len(df):,} rows for the analysis below."
     )
 
-# ----------------------------------------------------------------------
 # Summary metrics
-# ----------------------------------------------------------------------
 st.header("Summary metrics")
 
 col1, col2, col3 = st.columns(3)
@@ -94,9 +86,8 @@ col1.metric("Products analyzed", f"{len(df):,}")
 col2.metric("Average rating", f"{df['rating'].mean():.2f} / 5")
 col3.metric("Average discount", f"{df['discount_percentage'].mean():.0f}%")
 
-# ----------------------------------------------------------------------
+
 # Chart 1: Which categories have the most products?
-# ----------------------------------------------------------------------
 st.header("Which categories have the most products?")
 
 category_counts = (
@@ -121,9 +112,7 @@ st.write(
     f"across many."
 )
 
-# ----------------------------------------------------------------------
 # Chart 2: Which categories have the highest average ratings?
-# ----------------------------------------------------------------------
 st.header("Which categories have the highest average ratings?")
 
 min_products = st.slider(
@@ -155,9 +144,7 @@ st.write(
     "way to tell categories apart in this dataset."
 )
 
-# ----------------------------------------------------------------------
 # Chart 3: Actual price vs discounted price / rating
-# ----------------------------------------------------------------------
 st.header("How does price relate to rating?")
 
 fig3 = px.scatter(
@@ -178,9 +165,7 @@ st.write(
     "Higher price does not clearly buy a higher rating in this dataset."
 )
 
-# ----------------------------------------------------------------------
 # Chart 4: Biggest discounts
-# ----------------------------------------------------------------------
 st.header("Which products have the biggest discounts?")
 
 top_discounts = (
