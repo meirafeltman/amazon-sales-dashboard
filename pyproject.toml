@@ -1,0 +1,10 @@
+[project]
+name = "amazon-sales-dashboard"
+version = "0.1.0"
+description = "Amazon Sales Data Dashboard - CS-470 final project"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas",
+    "streamlit",
+    "plotly",
+]
