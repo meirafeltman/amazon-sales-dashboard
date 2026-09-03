@@ -40,4 +40,3 @@ Rows that couldn't be cleanly converted on any of these fields were dropped rath
 - `app.py` — the Streamlit dashboard
 - `data/raw/amazon.csv` — the dataset (not committed — see above)
 - `screenshots/` — dashboard screenshots for the writeup
-- `AI_USE.md` — log of AI tool usage during this project
